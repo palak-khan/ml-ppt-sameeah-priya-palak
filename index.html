@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Multi-Layer Perceptron Presentation</title>
+    <style>
+      @media print {
+        .slide {
+          page-break-after: always;
+          page-break-inside: avoid;
+        }
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .slide {
+        width: 900px;
+        height: auto;
+        min-height: 506px;
+        margin: 20px auto;
+        padding: 40px;
+        box-sizing: border-box;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        page-break-after: always;
+        position: relative;
+        overflow: visible;
+      }
+      .title-slide {
+        background: linear-gradient(135deg, #4527a0, #7b1fa2);
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .section-slide {
+        background: linear-gradient(135deg, #303f9f, #1976d2);
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 40px;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 32px;
+        margin-top: 0;
+        margin-bottom: 30px;
+        color: #303f9f;
+      }
+      .section-slide h2 {
+        font-size: 38px;
+        color: white;
+      }
+      .title-slide h1 {
+        font-size: 48px;
+      }
+      .title-slide p {
+        font-size: 24px;
+        margin-top: 60px;
+      }
+      ul,
+      ol {
+        font-size: 22px;
+        margin-top: 30px;
+        line-height: 1.5;
+        padding-right: 20px;
+      }
+      ul li,
+      ol li {
+        margin-bottom: 12px;
+      }
+      .two-column {
+        display: flex;
+        justify-content: space-between;
+      }
+      .column {
+        width: 48%;
+      }
+      .image-container {
+        text-align: center;
+        margin: 20px 0;
+      }
+      .code-block {
+        background-color: #f5f5f5;
+        border-left: 4px solid #303f9f;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 16px;
+        overflow: auto;
+        max-height: none;
+        white-space: pre-wrap;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+      }
+      th {
+        background-color: #303f9f;
+        color: white;
+        padding: 10px;
+        text-align: left;
+      }
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 40px;
+        font-size: 16px;
+        color: #666;
+      }
+      .slide-number {
+        position: absolute;
+        bottom: 20px;
+        right: 40px;
+        font-size: 16px;
+        color: #666;
+      }
+      .math {
+        font-style: italic;
+        font-size: 22px;
+        display: block;
+        margin: 20px 0;
+        text-align: center;
+      }
+      .content-box {
+        background-color: #f9f9f9;
+        border-left: 4px solid #7b1fa2;
+        padding: 15px;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Title Slide -->
+    <div class="slide title-slide">
+      <h1>MULTI-LAYER PERCEPTRON</h1>
+      <p>PREPARED BY:<br />PALAK, PRIYA, SAMEEAH, TASHVI</p>
+      <div class="slide-number">1</div>
+    </div>
+
+    <!-- Index Slide -->
+    <div class="slide">
+      <h2>INDEX</h2>
+      <ol>
+        <li>Introduction to Neural Networks</li>
+        <li>What is the Multi-Layer Perceptron?</li>
+        <li>Why Multi-Layer Perceptron is Used?</li>
+        <li>Architecture of MLP</li>
+        <li>How MLP Works</li>
+        <li>Backpropagation Algorithm</li>
+        <li>Activation Functions</li>
+        <li>Formula for Multi-layered Neural Network</li>
+        <li>Implementation of MLP</li>
+        <li>Applications of MLP</li>
+        <li>Advantages and Limitations</li>
+        <li>Comparison with Other Algorithms</li>
+        <li>Conclusion</li>
+      </ol>
+      <div class="slide-number">2</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>INTRODUCTION TO NEURAL NETWORKS</h2>
+      <div class="slide-number">3</div>
+    </div>
+
+    <!-- Introduction Slide -->
+    <div class="slide">
+      <h2>INTRODUCTION TO NEURAL NETWORKS</h2>
+      <ul>
+        <li>
+          <strong>Artificial Neural Networks (ANNs)</strong> are computing
+          systems inspired by the biological neural networks in human brains
+        </li>
+        <li>
+          They are designed to recognize patterns and solve complex problems
+        </li>
+        <li>
+          Neural networks learn progressively from examples, improving their
+          performance over time
+        </li>
+        <li>
+          They form the foundation of deep learning, a subset of machine
+          learning
+        </li>
+        <li>
+          ANNs consist of interconnected nodes (neurons) that process and
+          transmit information
+        </li>
+      </ul>
+      <div class="image-container">
+        <img
+          src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230602113310/Neural-Networks-Architecture.png"
+          alt="Neural Network Concept"
+        />
+      </div>
+      <div class="slide-number">4</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>WHAT IS MULTI-LAYER PERCEPTRON?</h2>
+      <div class="slide-number">5</div>
+    </div>
+
+    <!-- What is MLP Slide -->
+    <div class="slide">
+      <h2>WHAT IS MULTI-LAYER PERCEPTRON?</h2>
+      <p style="font-size: 22px">
+        A Multi-Layer Perceptron is a type of neural network that consists of
+        multiple layers of nodes, or "neurons." These layers include:
+      </p>
+      <div class="two-column">
+        <div class="column">
+          <ul>
+            <li>
+              <strong>Input Layer:</strong> This is where the data enters the
+              network. Each neuron represents one feature of the input data.
+            </li>
+            <li>
+              <strong>Hidden Layers:</strong> These are intermediate layers that
+              allow the network to learn complex patterns.
+            </li>
+            <li>
+              <strong>Output Layer:</strong> This layer produces the final
+              result, such as a class label or a numeric value.
+            </li>
+          </ul>
+        </div>
+        <div class="column"></div>
+      </div>
+      <p style="font-size: 22px">
+        Each neuron in a layer is connected to every neuron in the next layer,
+        and these connections have weights that are adjusted during training to
+        improve the network's performance.
+      </p>
+      <div class="slide-number">6</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>WHY MLP IS USED?</h2>
+      <div class="slide-number">7</div>
+    </div>
+
+    <!-- Why MLP is Used Slide -->
+    <div class="slide">
+      <h2>WHY MLP IS USED?</h2>
+      <ul>
+        <li>
+          <strong>Handling Complex Data:</strong> Unlike simple perceptrons that
+          can only deal with linearly separable data, MLPs can process complex
+          datasets and learn non-linear patterns.
+        </li>
+        <li>
+          <strong>Abstraction and Feature Extraction:</strong> Hidden layers
+          allow for hierarchical representations of the data.
+        </li>
+        <li>
+          <strong>Improved Accuracy:</strong> By using backpropagation to train
+          the model, MLPs can achieve higher accuracy and reduce prediction
+          errors.
+        </li>
+        <li>
+          <strong>Versatility:</strong> MLPs can be adapted to various tasks,
+          including classification, regression, and pattern recognition.
+        </li>
+        <li>
+          <strong>Real-time Training:</strong> MLPs can be trained in real-time
+          (online learning) and handle continuous data streams.
+        </li>
+      </ul>
+      <div class="slide-number">8</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>ARCHITECTURE OF MLP</h2>
+      <div class="slide-number">9</div>
+    </div>
+
+    <!-- Architecture Slide -->
+    <div class="slide">
+      <h2>ARCHITECTURE OF MLP</h2>
+
+      <ul>
+        <li>
+          <strong>Fully Connected Layers:</strong> Each neuron is connected to
+          every neuron in the adjacent layers
+        </li>
+        <li>
+          <strong>Feed-Forward Design:</strong> Information flows in one
+          direction, from input to output
+        </li>
+        <li>
+          <strong>Variable Number of Hidden Layers:</strong> Depending on the
+          complexity of the problem
+        </li>
+        <li>
+          <strong>Weight Parameters:</strong> Connections between neurons have
+          weights that determine the strength of influence
+        </li>
+        <li>
+          <strong>Bias Units:</strong> Additional parameters that allow the
+          network to fit the data better
+        </li>
+      </ul>
+      <div class="slide-number">10</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>HOW MLP WORKS</h2>
+      <div class="slide-number">11</div>
+    </div>
+
+    <!-- How MLP Works - Input Layer Slide -->
+    <div class="slide">
+      <h2>HOW MLP WORKS: INPUT LAYER</h2>
+      <div class="two-column">
+        <div class="column">
+          <ul>
+            <li>The input layer receives the data features</li>
+            <li>Each neuron in the input layer represents one feature</li>
+            <li>No computations are performed at this layer</li>
+            <li>
+              Input values are simply passed to the neurons in the first hidden
+              layer
+            </li>
+            <li>
+              The number of neurons in this layer equals the number of features
+              in the dataset
+            </li>
+          </ul>
+        </div>
+        <div class="column"></div>
+      </div>
+      <div class="slide-number">12</div>
+    </div>
+
+    <!-- How MLP Works - Hidden Layer Slide -->
+    <div class="slide">
+      <h2>HOW MLP WORKS: HIDDEN LAYER</h2>
+      <ul>
+        <li>
+          The hidden layers consist of interconnected neurons that perform
+          computations
+        </li>
+        <li>
+          Each neuron in a hidden layer receives input from all neurons in the
+          previous layer
+        </li>
+        <li>The inputs are multiplied by corresponding weights</li>
+        <li>For each neuron, the weighted sum of its inputs is computed:</li>
+      </ul>
+      <div class="math">z = w₁x₁ + w₂x₂ + ... + wₙxₙ + b</div>
+      <ul>
+        <li>
+          This weighted sum is then passed through an activation function:
+        </li>
+      </ul>
+      <div class="math">a = f(z)</div>
+      <p style="font-size: 22px">
+        The activation function introduces non-linearity, allowing the network
+        to learn complex relationships in the data.
+      </p>
+      <div class="slide-number">13</div>
+    </div>
+
+    <!-- How MLP Works - Output Layer Slide -->
+    <div class="slide">
+      <h2>HOW MLP WORKS: OUTPUT LAYER</h2>
+      <ul>
+        <li>
+          The output layer produces the final predictions or outputs of the
+          network
+        </li>
+        <li>
+          The number of neurons depends on the task:
+          <ul>
+            <li>Binary classification: 1 neuron</li>
+            <li>Multi-class classification: One neuron per class</li>
+            <li>Regression: Usually 1 neuron</li>
+          </ul>
+        </li>
+        <li>
+          Each neuron receives input from the last hidden layer and applies an
+          activation function
+        </li>
+        <li>
+          The activation function used in the output layer depends on the type
+          of problem:
+          <ul>
+            <li>Sigmoid for binary classification</li>
+            <li>Softmax for multi-class classification</li>
+            <li>Linear for regression</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="slide-number">14</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>BACKPROPAGATION ALGORITHM</h2>
+      <div class="slide-number">15</div>
+    </div>
+
+    <!-- Backpropagation Slide -->
+    <div class="slide">
+      <h2>BACKPROPAGATION ALGORITHM</h2>
+      <p style="font-size: 22px">
+        Backpropagation is the key algorithm used to train MLPs:
+      </p>
+      <ol>
+        <li>
+          <strong>Forward Pass:</strong> Input data is fed through the network
+          to generate predictions
+        </li>
+        <li>
+          <strong>Error Calculation:</strong> The difference between predicted
+          and actual outputs is calculated
+        </li>
+        <li>
+          <strong>Backward Pass:</strong> The error is propagated backward
+          through the network
+        </li>
+        <li>
+          <strong>Weight Updates:</strong> Weights are adjusted to minimize the
+          error using gradient descent
+        </li>
+        <li>
+          <strong>Iteration:</strong> Steps 1-4 are repeated until convergence
+          or reaching a stopping criterion
+        </li>
+      </ol>
+      <div class="content-box">
+        <p style="font-size: 20px">
+          The mathematical formula for weight updates:
+        </p>
+        <div class="math">w_new = w_old - learning_rate × ∂Error/∂w_old</div>
+      </div>
+      <div class="slide-number">16</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>ACTIVATION FUNCTIONS</h2>
+      <div class="slide-number">17</div>
+    </div>
+
+    <!-- Activation Functions Slide -->
+    <div class="slide">
+      <h2>ACTIVATION FUNCTIONS</h2>
+      <p style="font-size: 22px">
+        Activation functions introduce non-linearity to the network:
+      </p>
+      <div class="two-column">
+        <div class="column">
+          <ul>
+            <li>
+              <strong>Sigmoid:</strong> f(x) = 1/(1+e^(-x))<br />Outputs between
+              0 and 1
+            </li>
+            <li>
+              <strong>Tanh:</strong> f(x) = (e^x - e^(-x))/(e^x + e^(-x))<br />Outputs
+              between -1 and 1
+            </li>
+            <li>
+              <strong>ReLU:</strong> f(x) = max(0,x)<br />Most commonly used in
+              hidden layers
+            </li>
+            <li>
+              <strong>Leaky ReLU:</strong> f(x) = max(0.01x, x)<br />Addresses
+              the "dying ReLU" problem
+            </li>
+            <li>
+              <strong>Softmax:</strong> Used in output layer for multi-class
+              classification
+            </li>
+          </ul>
+        </div>
+        <div class="column"></div>
+      </div>
+      <div class="slide-number">18</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>FORMULA FOR MULTI-LAYERED NEURAL NETWORK</h2>
+      <div class="slide-number">19</div>
+    </div>
+
+    <!-- Formula Slide 1 -->
+    <div class="slide">
+      <h2>FORMULA FOR MULTI-LAYERED NEURAL NETWORK</h2>
+      <p style="font-size: 22px">For a typical MLP with one hidden layer:</p>
+      <div class="content-box">
+        <p style="font-size: 22px">
+          <strong>Hidden Layer Computation:</strong>
+        </p>
+        <div class="math">h_j = f(Σ(w_ji × x_i) + b_j)</div>
+        <p style="font-size: 20px">Where:</p>
+        <ul style="font-size: 20px">
+          <li>h_j is the output of the j-th hidden neuron</li>
+          <li>
+            w_ji is the weight from the i-th input to the j-th hidden neuron
+          </li>
+          <li>x_i is the i-th input</li>
+          <li>b_j is the bias for the j-th hidden neuron</li>
+          <li>f is the activation function</li>
+        </ul>
+      </div>
+      <div class="slide-number">20</div>
+    </div>
+
+    <!-- Formula Slide 2 -->
+    <div class="slide">
+      <h2>FORMULA FOR MULTI-LAYERED NEURAL NETWORK</h2>
+      <div class="content-box">
+        <p style="font-size: 22px">
+          <strong>Output Layer Computation:</strong>
+        </p>
+        <div class="math">y_k = g(Σ(v_kj × h_j) + c_k)</div>
+        <p style="font-size: 20px">Where:</p>
+        <ul style="font-size: 20px">
+          <li>y_k is the k-th output</li>
+          <li>
+            v_kj is the weight from the j-th hidden neuron to the k-th output
+            neuron
+          </li>
+          <li>h_j is the output of the j-th hidden neuron</li>
+          <li>c_k is the bias for the k-th output neuron</li>
+          <li>g is the activation function for the output layer</li>
+        </ul>
+      </div>
+      <div class="slide-number">21</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>IMPLEMENTATION OF MLP</h2>
+      <div class="slide-number">22</div>
+    </div>
+
+    <!-- Implementation Slide 1 -->
+    <div class="slide">
+      <h2>IMPLEMENTATION WITH SCIKIT-LEARN</h2>
+      <div class="code-block">
+        from sklearn.neural_network import MLPClassifier from sklearn.datasets
+        import make_classification from sklearn.model_selection import
+        train_test_split from sklearn.preprocessing import StandardScaler #
+        Generate synthetic data X, y = make_classification(n_samples=1000,
+        n_features=20, random_state=42) # Split the data X_train, X_test,
+        y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        # Scale the features scaler = StandardScaler() X_train =
+        scaler.fit_transform(X_train) X_test = scaler.transform(X_test) # Create
+        and train the MLP mlp = MLPClassifier(hidden_layer_sizes=(100, 50),
+        activation='relu', solver='adam', max_iter=500, random_state=42)
+        mlp.fit(X_train, y_train) # Evaluate the model train_accuracy =
+        mlp.score(X_train, y_train) test_accuracy = mlp.score(X_test, y_test)
+        print(f"Training accuracy: {train_accuracy:.4f}") print(f"Testing
+        accuracy: {test_accuracy:.4f}")
+      </div>
+      <div class="slide-number">23</div>
+    </div>
+
+    <!-- Implementation Slide 2 -->
+    <div class="slide">
+      <h2>IMPLEMENTATION WITH TENSORFLOW/KERAS</h2>
+      <div class="code-block">
+        import tensorflow as tf from tensorflow.keras.models import Sequential
+        from tensorflow.keras.layers import Dense import numpy as np # Create
+        and compile the model model = Sequential([ Dense(100, activation='relu',
+        input_shape=(20,)), Dense(50, activation='relu'), Dense(1,
+        activation='sigmoid') ]) model.compile(optimizer='adam',
+        loss='binary_crossentropy', metrics=['accuracy']) # Train the model
+        history = model.fit(X_train, y_train, epochs=50, batch_size=32,
+        validation_data=(X_test, y_test), verbose=0) # Evaluate the model loss,
+        accuracy = model.evaluate(X_test, y_test) print(f"Test accuracy:
+        {accuracy:.4f}")
+      </div>
+      <div class="slide-number">24</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>APPLICATIONS OF MLP</h2>
+      <div class="slide-number">25</div>
+    </div>
+
+    <!-- Applications Slide -->
+    <div class="slide">
+      <h2>APPLICATIONS OF MLP</h2>
+      <div class="two-column">
+        <div class="column">
+          <ul>
+            <li>
+              <strong>Image Recognition:</strong> Classifying images and
+              detecting objects
+            </li>
+            <li>
+              <strong>Natural Language Processing:</strong> Text classification,
+              sentiment analysis
+            </li>
+            <li>
+              <strong>Speech Recognition:</strong> Converting spoken language to
+              text
+            </li>
+            <li>
+              <strong>Financial Forecasting:</strong> Predicting stock prices
+              and market trends
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <ul>
+            <li>
+              <strong>Medical Diagnosis:</strong> Detecting diseases from
+              medical images and patient data
+            </li>
+            <li>
+              <strong>Recommendation Systems:</strong> Suggesting products or
+              content to users
+            </li>
+            <li>
+              <strong>Anomaly Detection:</strong> Identifying unusual patterns
+              or outliers in data
+            </li>
+            <li>
+              <strong>Process Control:</strong> Optimizing industrial processes
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slide-number">26</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>ADVANTAGES AND LIMITATIONS</h2>
+      <div class="slide-number">27</div>
+    </div>
+
+    <!-- Advantages and Limitations Slide -->
+    <div class="slide">
+      <h2>ADVANTAGES AND LIMITATIONS</h2>
+      <div class="two-column">
+        <div class="column">
+          <h3 style="color: #303f9f">Advantages:</h3>
+          <ul>
+            <li>Capable of learning complex non-linear relationships</li>
+            <li>Adaptable to a wide range of problems</li>
+            <li>Can handle high-dimensional data</li>
+            <li>Robust to noise in the data</li>
+            <li>Generalizes well when properly trained</li>
+          </ul>
+        </div>
+        <div class="column">
+          <h3 style="color: #303f9f">Limitations:</h3>
+          <ul>
+            <li>Requires substantial computing resources</li>
+            <li>Prone to overfitting without proper regularization</li>
+            <li>Training can be time-consuming for large datasets</li>
+            <li>Black-box nature makes interpretation difficult</li>
+            <li>Sensitive to hyperparameter choices</li>
+            <li>Requires large amounts of labeled data</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-number">28</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>COMPARISON WITH OTHER ALGORITHMS</h2>
+      <div class="slide-number">29</div>
+    </div>
+
+    <!-- Comparison Slide -->
+    <div class="slide">
+      <h2>COMPARISON WITH OTHER ALGORITHMS</h2>
+      <table>
+        <tr>
+          <th>Algorithm</th>
+          <th>Advantages over MLP</th>
+          <th>Disadvantages compared to MLP</th>
+        </tr>
+        <tr>
+          <td>Decision Trees</td>
+          <td>More interpretable, faster training</td>
+          <td>Less accurate for complex patterns</td>
+        </tr>
+        <tr>
+          <td>SVM</td>
+          <td>Better for small datasets with clear margins</td>
+          <td>Less effective for large-scale problems</td>
+        </tr>
+        <tr>
+          <td>Random Forest</td>
+          <td>More robust, less overfitting</td>
+          <td>Less powerful for complex relationships</td>
+        </tr>
+        <tr>
+          <td>CNN</td>
+          <td>Better for spatial data (images)</td>
+          <td>More specialized, not as versatile</td>
+        </tr>
+        <tr>
+          <td>RNN</td>
+          <td>Better for sequential data</td>
+          <td>More complex training process</td>
+        </tr>
+      </table>
+      <div class="slide-number">30</div>
+    </div>
+
+    <!-- Section Slide -->
+    <div class="slide section-slide">
+      <h2>CONCLUSION</h2>
+      <div class="slide-number">31</div>
+    </div>
+
+    <!-- Conclusion Slide -->
+    <div class="slide">
+      <h2>CONCLUSION</h2>
+      <ul>
+        <li>
+          Multi-Layer Perceptrons are versatile neural networks that can solve a
+          wide range of complex problems
+        </li>
+        <li>
+          They excel at learning non-linear patterns and relationships in data
+        </li>
+        <li>
+          The architecture of hidden layers allows for powerful feature
+          extraction and representation
+        </li>
+        <li>
+          MLPs form the foundation for more complex neural network architectures
+        </li>
+        <li>
+          With proper training and regularization, MLPs can generalize well to
+          unseen data
+        </li>
+        <li>
+          Despite limitations, MLPs remain a fundamental tool in the machine
+          learning toolbox
+        </li>
+      </ul>
+
+      <div class="slide-number">32</div>
+    </div>
+
+    <!-- References Slide -->
+    <div class="slide">
+      <h2>REFERENCES</h2>
+      <ol style="font-size: 20px">
+        <li>
+          Goodfellow, I., Bengio, Y., & Courville, A. (2016).
+          <em>Deep Learning</em>. MIT Press.
+        </li>
+        <li>
+          Haykin, S. (2009). <em>Neural Networks and Learning Machines</em>.
+          Pearson.
+        </li>
+        <li>
+          Bishop, C. M. (2006).
+          <em>Pattern Recognition and Machine Learning</em>. Springer.
+        </li>
+        <li>
+          Chollet, F. (2018). <em>Deep Learning with Python</em>. Manning
+          Publications.
+        </li>
+        <li>
+          Raschka, S., & Mirjalili, V. (2019). <em>Python Machine Learning</em>.
+          Packt Publishing.
+        </li>
+      </ol>
+      <div class="content-box" style="margin-top: 30px">
+        <p style="font-size: 22px; text-align: center">Thank You!</p>
+      </div>
+      <div class="slide-number">33</div>
+    </div>
+  </body>
+</html>
